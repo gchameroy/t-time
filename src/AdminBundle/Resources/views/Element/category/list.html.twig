@@ -1,0 +1,15 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>List of categories</h5>
+        <div class="ibox-tools"></div>
+    </div>
+    <div class="ibox-content">
+        <div class="project-list">
+            <ul class="sortable-list connectList agile-list ui-sortable" name="categories">
+                {% for category in categories %}
+                    {{ render(controller('AdminBundle:Category:simple', {'id': category.id})) }}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

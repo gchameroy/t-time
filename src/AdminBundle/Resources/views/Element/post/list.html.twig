@@ -1,0 +1,23 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>List of posts</h5>
+        <div class="ibox-tools">
+            <a href="{{ path('admin_post_add') }}" class="btn btn-primary btn-sm">Add a post</a>
+        </div>
+    </div>
+    <div class="ibox-content">
+        <div class="project-list">
+            {% if posts %}
+                <table class="table table-hover">
+                    <tbody>
+                        {% for post in posts %}
+                            {{ render(controller('AdminBundle:Post:simple', {'id': post.id})) }}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <a href="{{ path('admin_post_add') }}" class="btn btn-primary btn-sm">There is no post, add a new one.</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

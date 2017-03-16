@@ -1,0 +1,25 @@
+<div class="row white-bg">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="container">
+            <a href="{{ path('app_home') }}" style="padding: 8px 0; display:inline-block;">
+                <img src="{{ asset('img/logo.png') }}" height="40">
+            </a>
+            <ul class="nav navbar-top-links navbar-right">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li><a href="{{ path('logout') }}"><i class="fa fa-sign-out"></i> Sign out</a></li>
+                {% else %}
+                    <li><a href="{{ path('login') }}">Sign In</a></li>
+                    <li><a href="{{ path('signup') }}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="container">
+            {{ render(controller('AppBundle:Category:list')) }}
+        </div>
+    </nav>
+</div>

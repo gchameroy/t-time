@@ -1,0 +1,33 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block title parent() ~ ' - Posts' %}
+
+{% block nav %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-xs-10">
+            <h2>List of posts</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('admin_home') }}">Home</a>
+                </li>
+                <li class="active">
+                    <strong>Posts</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-xs-2">
+            <div class="title-action">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                {{ render(controller("AdminBundle:Post:list")) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

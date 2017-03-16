@@ -1,0 +1,36 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block title parent() ~ ' - Add post' %}
+
+{% block nav %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-xs-10">
+            <h2>New post</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('admin_home') }}">Home</a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_posts') }}">Posts</a>
+                </li>
+                <li class="active">
+                    <strong>New post</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-xs-2">
+            <div class="title-action">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                {{ render(controller("AdminBundle:Post:add")) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block title parent() ~ ' - Sign Up' %}
+
+{% block body %}
+    <body class="gray-bg">
+        <div class="middle-box text-center loginscreen animated fadeInDown">
+            <div>
+                <h3>Sign up</h3>
+                {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    <div class="form-group">
+                        {{ form_errors(form.username) }}
+                        {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'Username'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(form.email) }}
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(form.plainPassword.first) }}
+                        {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'Password'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(form.plainPassword.second) }}
+                        {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'Confirm password'}}) }}
+                    </div>
+                    <button type="submit" class="btn btn-primary block full-width m-b">Sign Up</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </body>
+{% endblock %}

@@ -1,0 +1,5 @@
+<ul class="nav navbar-top-links navbar-right">
+    {% for category in categories %}
+        <li><a href="{{ path('app_category', {slug: category.slug}) }}">{{ category.label }}</a></li>
+    {% endfor %}
+</ul>

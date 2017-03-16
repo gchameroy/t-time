@@ -1,0 +1,29 @@
+<h2>Comments:</h2>
+<div id="comments">
+    {% for comment in comments %}
+        <div class="comment social-feed-box">
+            {{ render(controller("AppBundle:Comment:full", {id: comment.id})) }}
+        </div>
+    {% endfor %}
+</div>
+
+{% if comments|length == 10 %}
+    <div id="commentPagging">
+        <p class="text-center">
+            <a class="btn btn-white next" href="{{ path('app_comment_list', {postId: postId, page: page + 1}) }}">View more</a>
+        </p>
+    </div>
+{% endif %}
+
+<script>
+    $(document).ready(function(){
+        var ias = jQuery.ias({
+            container: '#comments',
+            item: '.comment',
+            pagination: '#commentPagging',
+            next: '.next'
+        });
+        
+        ias.extension(new IASSpinnerExtension());
+    });
+</script>

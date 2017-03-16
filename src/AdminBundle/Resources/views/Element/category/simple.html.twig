@@ -1,0 +1,53 @@
+<li name="project_view" id="{{ category.id }}" data-id_category="{{ category.id }}">
+    <div class="row">
+        <div class="col-xs-1">
+            <a data-hidden="0" class="label {% if category.visible %}label-primary{% else %}label-default{% endif %}" onClick="category_visibility_swap_{{ category.id }}($(this))">
+                <i class="fa fa-eye hidden-lg hidden-md hidden-sm"></i>
+                <span class="hidden-xs">Visible</span>
+            </a>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-5">
+            <a>{{ category.label }}</a>
+        </div>
+        <div class="col-md-2 hidden-sm hidden-xs text-center">{{ category.posts|length }} articles</div>
+        <div class="col-md-4 text-right">
+            <a class="btn btn-info btn-xs" onClick="category_edit_{{ category.id }}()">
+                <i class="fa fa-edit hidden-lg hidden-md hidden-sm"></i>
+                <span class="hidden-xs">Edit</span>
+            </a>
+            {% if category.posts|length == 0 %}
+                <a class="btn btn-danger btn-xs" href="{{ path('admin_category_remove', {id: category.id}) }}">
+                    <i class="fa fa-remove hidden-lg hidden-md hidden-sm"></i>
+                    <span class="hidden-xs">Delete</span>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</li>
+
+<script>
+    function category_edit_{{ category.id }}(){
+        $.get('{{ path('admin_category_edit', {id: category.id}) }}').done(function(response){
+            $(response).modal();
+        });
+    }
+
+    function category_visibility_swap_{{ category.id }}($object){
+        $.ajax({
+            type: 'patch',
+            dataType: 'json',
+            url: '{{ path('admin_category_visibility_swap', {id: category.id}) }}',
+            success: function(response){
+                if(response.valid){
+                    if($object.hasClass('label-primary')){
+                        $object.removeClass('label-primary')
+                        $object.addClass('label-default')
+                    } else {
+                        $object.addClass('label-primary')
+                        $object.removeClass('label-default')
+                    }
+                }
+            }
+        });
+    }
+</script>

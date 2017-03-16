@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{% block title 'T Time' %}</title>
+
+        {% include 'AppBundle::Layout/css.html.twig' only %}
+
+        <link rel="icon" type="image/png" href="{{ asset('img/ttime-favicon.png') }}">
+
+        <script src="{{ asset('inspinia/js/jquery-2.1.1.js') }}"></script>
+        <script src="{{ asset('inspinia/js/jquery-ui-1.10.4.min.js') }}"></script>
+        <script src="{{ asset('inspinia/js/plugins/ias/jquery-ias.min.js') }}"></script>
+    </head>
+
+    {% block body %}
+        <body class="gray-bg">
+            {% block tools %}
+                {% include 'AppBundle::Layout/tools.html.twig' only %}
+            {% endblock %}
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="container">
+                    <div class="col-lg-6">
+                        {% block navigation '' %}
+                    </div>
+                    <div class="col-lg-6">
+                        {% include 'AppBundle::Layout/navigation.html.twig' %}
+                    </div>
+                </div>
+            </div>
+
+            {% block content '' %}
+
+            {% include 'AppBundle::Layout/footer.html.twig' only %}
+        </body>
+    {% endblock %}
+</html>

@@ -1,0 +1,27 @@
+<div class="row" id="posts">
+    {% for post in posts|slice(0,9) %}
+        <div class="col-lg-4 post">
+            {{ render(controller("AppBundle:Post:simple", {id: post.id})) }}
+        </div>
+    {% endfor %}
+</div>
+{% if posts|length == 10 %}
+    <div id="pagination">
+        <p class="text-center">
+            <a class="btn btn-white next" href="{{ path('app_category_post_list', {slug: category.slug, page: page + 1}) }}">View more</a>
+        </p>
+    </div>
+{% endif %}
+
+<script>
+    $(document).ready(function(){
+        var ias = jQuery.ias({
+            container: '#posts',
+            item: '.post',
+            pagination: '#pagination',
+            next: '.next'
+        });
+        
+        ias.extension(new IASSpinnerExtension());
+    });
+</script>

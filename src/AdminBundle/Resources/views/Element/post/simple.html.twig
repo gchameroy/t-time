@@ -1,0 +1,83 @@
+<tr data-id_post="{{ post.id }}">
+    <td>
+        {% if post.isDraft %}
+            <span class="label label-default">
+                <i class="fa fa-circle hidden-lg hidden-md hidden-sm"></i>
+                <span class="hidden-xs">Draft</span>
+            </span>
+        {% elseif post.isPublished %}
+            <span class="label label-primary">
+                <i class="fa fa-circle hidden-lg hidden-md hidden-sm"></i>
+                <span class="hidden-xs">Published</span>
+            </span>
+        {% endif %}
+    </td>
+    <td class="hidden-sm hidden-xs">{% if post.category %}{{ post.category.label }}{% endif %}</td>
+    <td class="project-title">
+        <a href="{{ path('admin_post', {'id': post.id}) }}">{{ post.title | truncate(45) }}</a>
+        <br>
+        {% if post.isDraft %}
+            <small>Updated at {{ post.updatedAt|date('d/m/Y') }}</small>
+        {% elseif post.isPublished %}
+            <small>Published at {{ post.publishedAt|date('d/m/Y') }}</small>
+        {% endif %}
+    </td>
+    <td class="hidden-xs hidden-md hidden-sm">{{ post.content | striptags | wordwrap(50) | truncate(100) | nl2br }}</td>
+    <td class="text-right">
+        {% if post.isDraft %}
+            <a class="btn btn-primary btn-xs" onclick="post_publish_{{ post.id }}()">
+                <i class="fa fa-edit hidden-lg hidden-md hidden-sm"></i>
+                <span class="hidden-xs">Publish</span>
+            </a>
+        {% endif %}
+        <a class="btn btn-info btn-xs" href="{{ path('admin_post_edit', {'id': post.id}) }}">
+            <i class="fa fa-edit hidden-lg hidden-md hidden-sm"></i>
+            <span class="hidden-xs">Edit</span>
+        </a>
+        <a class="btn btn-danger btn-xs" onClick="post_remove_{{ post.id }}($(this))">
+            <i class="fa fa-remove hidden-lg hidden-md hidden-sm"></i>
+            <span class="hidden-xs">Delete</span>
+        </a>
+    </td>
+</tr>
+
+<script>
+    function post_remove_{{ post.id }}($object) {
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this post.",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#ed5565",
+            confirmButtonText: "Yes, delete it",
+            closeOnConfirm: true
+        },
+        function(){
+            $.ajax({
+                type: 'delete',
+                dataType: 'json',
+                url: '{{ path('admin_post_delete', {id: post.id}) }}',
+                success: function(response){
+                    if(response.valid){
+                        $object.closest('[data-id_post]').remove();
+                    }
+                }
+            });
+        });
+    }
+
+    function post_publish_{{ post.id }}() {
+        swal({
+                title: "Are you sure?",
+                text: "You will not be able to cancel this action.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#a5c728",
+                confirmButtonText: "Yes, publish it",
+                closeOnConfirm: true
+            },
+            function(){
+                window.location.href = "{{ path('admin_post_publish', {slug: post.slug}) }}";
+            });
+    }
+</script>

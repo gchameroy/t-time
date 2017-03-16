@@ -1,0 +1,19 @@
+<div class="social-avatar">
+    <a href="" class="pull-left">
+        <img alt="image" src="{{ gravatar(comment.user.email) }}">
+    </a>
+    <div class="media-body">
+        <a href="#">{{ comment.user.username }}</a>
+        <small class="text-muted">
+            {% if "now"|date("d/m/Y") == comment.insertedAt|date('d/m/Y') %}
+                Today {{ comment.insertedAt|date('h:i a') }} -
+            {% elseif "now"|date_modify("-1 day")|date("d/m/Y") == comment.insertedAt|date('d/m/Y') %}
+                Yesterday {{ comment.insertedAt|date('h:i a') }} -
+            {% endif %}
+            {{ comment.insertedAt|date('m/d/Y') }}
+        </small>
+    </div>
+</div>
+<div class="social-body">
+    {{ comment.message|raw }}
+</div>

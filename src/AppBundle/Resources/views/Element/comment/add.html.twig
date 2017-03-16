@@ -1,0 +1,17 @@
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {{ form_start(form, {'action': path('app_comment_add', {id: post.id})}) }}
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    {{ form_label(form.message, "Add a comment", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_widget(form.message, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        </div>
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-default'}}) }}
+        {{ form_rest(form) }}
+    {{ form_end(form) }}
+{% else %}
+    <p>You must be connected for add a comment
+    <br><a class="btn btn-default" href="{{ path('app_post_signin', {slug: post.slug}) }}">Sign in</a></p>
+{% endif %}

@@ -1,0 +1,22 @@
+.wrapper-content {
+    padding-bottom: 0;
+}
+.footer {
+    position: relative;
+}
+
+.nav.navbar-right > li > a {
+    border-top: 3px solid transparent;
+    color: #999c9e;
+}
+.nav.navbar-right > li.active {
+    border-left: none;
+    background: transparent;
+}
+.nav.navbar-right > li.active > a {
+    border-top: 3px solid #a5c728;
+}
+.nav.navbar-right > li > a:hover {
+    border-top: 3px solid #a5c728;
+    color: #a5c728;
+}

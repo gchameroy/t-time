@@ -1,0 +1,20 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>Add a category</h5>
+        <div class="ibox-tools"></div>
+    </div>
+    <div class="ibox-content">
+        {{ form_start(form, {'action': path('admin_category_add')}) }}
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        {{ form_label(form.label, "Category name", {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(form.label, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+            {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+</div>

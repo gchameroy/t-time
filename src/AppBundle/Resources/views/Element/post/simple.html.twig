@@ -1,0 +1,29 @@
+<div class="ibox" data-id_post="{{ post.id }}">
+    <div class="ibox-content">
+        <a href="{{ path('app_post', {'slug': post.slug}) }}" class="btn-link">
+            <h2>{{ post.title }}</h2>
+        </a>
+        <div class="small m-b-xs">
+            <a class="btn btn-primary btn-xs">{{ post.category.label }}</a>
+            <span class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{ post.publishedAt|date('d/m/Y') }}</span>
+        </div>
+        <p>{{ post.content | striptags | raw | truncate(300) }}</p>
+        <div class="row">
+            <div class="col-md-8">
+                {#
+                <h5>Tags:</h5>
+                {% for tag in post.tags %}
+                    <button class="btn btn-white btn-xs" type="button">{{ tag.label }}</button>
+                {% endfor %}
+                #}
+            </div>
+            <div class="col-md-4">
+                <div class="small text-right">
+                    <h5>Stats:</h5>
+                    <div><i class="fa fa-comments-o"> </i> {{ post.comments|length }} comments</div>
+                    <i class="fa fa-eye"> </i> {{ post.view }} views
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
